@@ -1,0 +1,19 @@
+---
+- name: Add IP to MikroTik blocklist
+  hosts: mikrotik
+  gather_facts: no
+
+  vars:
+    address_to_block: "1.2.3.4"
+    list_name: "blocked"
+
+  tasks:
+    - name: Add IP to address-list
+      community.routeros.command:
+        commands:
+          - /ip firewall address-list add list={{ list_name }} address={{ address_to_block }} comment="Added by Ansible"
+      register: add_result
+
+    - name: Show result
+      debug:
+        var: add_result
