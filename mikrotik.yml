@@ -1,6 +1,7 @@
 ---
 - name: Add IP to MikroTik blocklist
   hosts: 192.168.1.200
+  connection: network_cli
   gather_facts: no
 
   vars:
